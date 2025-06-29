@@ -24,12 +24,13 @@ jobs:
       - name: Setup Node npm
         uses: actions/setup-node@v3
 
-      - uses: jfrog/setup-jfrog-cli@v4
-          env:
-          JF_URL: https://ornaishtat.jfrog.io 
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: https://ornaishtat.jfrog.io
         with:
-          oidc-provider-name: pavel-workshop-oidc 
-        
+          oidc-provider-name: pavel-workshop-oidc
+          oidc-audience: ${{ env.OIDC_AUDIENCE }}
 
       - name: Set CLI Config
         run: jf npm-config --global=true --repo-resolve=default-npm-remote --repo-deploy=default-npm-local
